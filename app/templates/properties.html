@@ -5,14 +5,18 @@
 
 {% include 'flash_messages.html' %}
 <div class="properties">
-    {% for property in properties %}
-        <div>
-            <img src="{{ url_for('get_image', filename=property.photo) }}">
-            <h3>{{ property.title }}</h3>
-            <p>{{ property.location }}</p>
-            <p>${{ property.price }}</p>
-            <button type="button">View Property</button>
-        </div>
-    {% endfor %}
+    <div class="prop-grid">
+        {% for property in properties %}
+            <form action="{{ url_for('get_prop', propertyid=property.id) }}" method="GET">
+                <div class="prop">
+                    <img src="{{ url_for('get_image', filename=property.photo) }}">
+                    <h3>{{ property.title }}</h3>
+                    <p>{{ property.location }}</p>
+                    <p>${{ property.price }}</p>
+                    <button type="submit">View Property</button>
+                </div>
+            </form>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

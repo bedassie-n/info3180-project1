@@ -60,8 +60,13 @@ def properties():
 
 
 @app.route('/property/<int:propertyid>')
-def get_prop():
-    pass
+def get_prop(propertyid):
+    if type(propertyid) == int:
+        prop = Property.query.get(propertyid)
+        return render_template("property.html", property=prop)
+    else:
+        flash("Error getting property", "danger")
+        return redirect("/properties")
 
 @app.route('/uploads/<filename>')
 def get_image(filename):
