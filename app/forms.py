@@ -8,7 +8,7 @@ class PropertyForm(FlaskForm):
     rooms = StringField("No. of Rooms", [DataRequired()])
     bathrooms = StringField("No. of Bathrooms",[DataRequired()])
     price = StringField("Price", [DataRequired()])
-    type = SelectField("Property Type", [DataRequired()], choices=["House", "Apartment"])
+    ptype = SelectField("Property Type", [DataRequired()], choices=["House", "Apartment"])
     location = StringField("Location", [DataRequired()])
     photo = FileField("Photo", [DataRequired(), Regexp('^[^/\\]+\.((png)|(jpg)|jpeg)$')])
  

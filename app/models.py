@@ -9,28 +9,25 @@ class Property(db.Model):
     # to `user_profiles` (plural) or some other name.
     __tablename__ = 'property'
 
-    # title 
-    # description =
-    # rooms 
-    # bathrooms = 
-    # price = 
-    # type = 
-    # location 
-
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
     description = db.Column(db.String(1024))
-    rooms = 
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(80))
-    last_name = db.Column(db.String(80))
-    username = db.Column(db.String(80), unique=True)
-    password = db.Column(db.String(255))
+    rooms = db.Column(db.String(3))
+    bathrooms = db.Column(db.String(3))
+    price = db.Column(db.String(50))
+    ptype = db.Column(db.String(30))
+    location = db.Column(db.String(4096))
+    photo = db.Column(db.String(255))
 
-    def __init__(self, first_name, last_name, username, password):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.username = username
-        self.password = generate_password_hash(password, method='pbkdf2:sha256')
+    def __init__(self, title, description, rooms, bathrooms, price, ptype, location, photo):
+        self.title = title
+        self.description = description
+        self.rooms = rooms
+        self.bathrooms = bathrooms
+        self.price = price
+        self.ptype = ptype
+        self.location = location
+        self.photo = photo
 
     def __repr__(self):
-        return '<Property %r>' % (self.username)
+        return '<Property %r, $%r>' % (self.title, self.price)

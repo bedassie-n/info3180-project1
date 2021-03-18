@@ -5,9 +5,10 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 
-from app import app
-from flask import render_template, request, redirect, url_for
-
+from app import app, db
+from flask import render_template, request, redirect, url_for, flash
+from app.forms import PropertyForm
+from app.models import Property
 
 ###
 # Routing for your application.
@@ -23,6 +24,37 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
+
+
+@app.route('/property')
+def prop():
+    form = PropertyForm()
+    if request.method == "POST" and form.validate_on_submit():
+        title = form.title.data
+        description = form.description.data
+        rooms = form.rooms.data
+        bathrooms = form.bathrooms.data
+        price = form.price.data
+        ptype = form.ptype.data
+        location = form.location.data
+        property = Property(title, description, rooms, bathrooms, price, ptype, location)
+        db.session.add(property)
+        db.session.commit()
+        photo = request.files['photo']
+        filename = secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash('Property added successfully', 'success')
+    else:
+        flash_errors(form)
+    return render_template("add_property.html", form=form)
+
+@app.route('/properties')
+def properties():
+    pass
+
+@app.route('/property/<propertyid>')
+def get_prop():
+    pass
 
 
 ###
