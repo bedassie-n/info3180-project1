@@ -52,7 +52,7 @@ def prop():
 def properties():
     pass
 
-@app.route('/property/<propertyid>')
+@app.route('/property/<int:propertyid>')
 def get_prop():
     pass
 

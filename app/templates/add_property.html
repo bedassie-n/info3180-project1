@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section>
+    <h1>Add New Property</h1>
+    {% include 'flash_messages.html' %}
+
+    <form action="{{ url_for('prop') }}" method="POST" enctype="multipart/form-data">
+        {# Add the file upload field as you learnt for Flask-WTF #}
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    {{ form.title.label }}
+                    {{ form.title(class = "w-100") }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.description.label }}
+                    {{ form.description(class = "w-100") }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col ">
+                    {{ form.rooms.label }}
+                    {{ form.rooms }}
+                </div>
+                <div class="col">
+                    {{ form.bathrooms.label }}
+                    {{ form.bathrooms }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.price.label }}
+                    {{ form.price }}
+                </div>
+                <div class="col">
+                    {{ form.ptype.label }}
+                    {{ form.ptype }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.location.label }}
+                    {{ form.location }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.photo.label }}
+                    {{ form.photo }}
+                </div>
+            </div>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Add Property</button>
+    </form>
+</section>
+{% endblock %}

@@ -10,5 +10,5 @@ class PropertyForm(FlaskForm):
     price = StringField("Price", [DataRequired()])
     ptype = SelectField("Property Type", [DataRequired()], choices=["House", "Apartment"])
     location = StringField("Location", [DataRequired()])
-    photo = FileField("Photo", [DataRequired(), Regexp('^[^/\\]+\.((png)|(jpg)|jpeg)$')])
+    photo = FileField("Photo", [DataRequired(), Regexp(r'^[^/\\]+\.((png)|(jpg)|(jpeg))$', message="Photo must be jgp or png.")])
  
