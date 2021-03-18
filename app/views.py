@@ -4,9 +4,10 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-
+import os
 from app import app, db
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
+from werkzeug.utils import secure_filename
 from app.forms import PropertyForm
 from app.models import Property
 
@@ -37,14 +38,17 @@ def prop():
         price = form.price.data
         ptype = form.ptype.data
         location = form.location.data
-        property = Property(title, description, rooms, bathrooms, price, ptype, location)
-        db.session.add(property)
-        db.session.commit()
         photo = request.files['photo']
-        filename = secure_filename(photo.filename)
-        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash('Property added successfully', 'success')
-        return render_template("properties.html")
+        if photo and allowed_file(photo.filename):
+            filename = secure_filename(photo.filename)
+            prop = Property(title, description, rooms, bathrooms, price, ptype, location, filename)
+            db.session.add(prop)
+            db.session.commit()
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            flash('Property added successfully', 'success')
+            return redirect('/properties')
+        else:
+            flash("Photo must be either png or jpg.")
     else:
         flash_errors(form)
     return render_template("add_property.html", form=form)
@@ -54,6 +58,7 @@ def properties():
     properties = db.session.query(Property).all()
     return render_template("properties.html", properties=properties)
 
+
 @app.route('/property/<int:propertyid>')
 def get_prop():
     pass
@@ -61,6 +66,10 @@ def get_prop():
 @app.route('/uploads/<filename>')
 def get_image(filename):
     return send_from_directory(os.path.join('..', app.config['UPLOAD_FOLDER']), filename)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 ###
 # The functions below should be applicable to all Flask apps.
