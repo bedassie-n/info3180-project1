@@ -10,7 +10,8 @@ class Config(object):
     MAIL_PORT = os.environ.get('MAIL_PORT') or '25'
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-
+    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or './uploads'
+    
 class DevelopmentConfig(Config):
     """Development Config that extends the Base Config Object"""
     DEVELOPMENT = True

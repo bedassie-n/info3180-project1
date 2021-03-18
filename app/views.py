@@ -26,7 +26,7 @@ def about():
     return render_template('about.html', name="Mary Jane")
 
 
-@app.route('/property')
+@app.route('/property', methods=["GET", "POST"])
 def prop():
     form = PropertyForm()
     if request.method == "POST" and form.validate_on_submit():
@@ -44,18 +44,23 @@ def prop():
         filename = secure_filename(photo.filename)
         photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash('Property added successfully', 'success')
+        return render_template("properties.html")
     else:
         flash_errors(form)
     return render_template("add_property.html", form=form)
 
 @app.route('/properties')
 def properties():
-    pass
+    properties = db.session.query(Property).all()
+    return render_template("properties.html", properties=properties)
 
 @app.route('/property/<int:propertyid>')
 def get_prop():
     pass
 
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    return send_from_directory(os.path.join('..', app.config['UPLOAD_FOLDER']), filename)
 
 ###
 # The functions below should be applicable to all Flask apps.
