@@ -32,6 +32,10 @@ nav span svg{
     fill: white;
 }
 
+h1{
+    font-weight: bolder;
+}
+
 .property-info.rooms p{
     align-self: center;
     align-content: center;
@@ -70,6 +74,7 @@ nav span svg{
     fill: rgb(165, 165, 165);
     color: rgb(165, 165, 165);
     font-weight: 200;
+    margin-bottom: 1em;
 }
 
 .prop-info span{
@@ -79,7 +84,28 @@ nav span svg{
     background-color: rgb(68, 168, 255);
     padding: 1%;
     border-radius: 10px;
-    margin-top: 2em;
+    margin-top: 10em;
+}
+
+.prop button{
+    border: 0;
+    height: 50px;
+    width: 100%;
+    color: white;
+    font-weight: bolder;
+    background-color: rgb(5, 199, 189);
+    border-radius: 2px;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.prop button:hover{
+    cursor: pointer;
+    color: rgb(5, 199, 189);
+    background-color: azure;
+    
 }
 
 .housing{
