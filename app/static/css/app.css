@@ -25,10 +25,13 @@ nav div{
 
 nav div ul li{
     margin-right: 1em;
+    font-weight: 200;
+    transition: all .5s ease-in;
 }
 
-nav div ul li{
-    font-weight: 200;
+.navlink:hover{
+    border-bottom: solid azure;
+    border-bottom: thick;
 }
 
 nav span svg{
@@ -159,14 +162,15 @@ h1{
 .property div img{
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    max-height: min-content;
+    max-height: max-content;
     width: 100%;
     object-fit: cover;
     overflow: hidden;
 }
 
-.property-img{
+.property_img{
     grid-area: 1 / 1 / 2 / 2;
+    max-height: max-content;
 }
 
 .property-info{
