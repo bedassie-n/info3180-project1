@@ -5,52 +5,54 @@
     <h1>Add New Property</h1>
     {% include 'flash_messages.html' %}
 
-    <form action="{{ url_for('prop') }}" method="POST" enctype="multipart/form-data">
+    <form class="prop-form" action="{{ url_for('prop') }}" method="POST" enctype="multipart/form-data">
         {# Add the file upload field as you learnt for Flask-WTF #}
         {{ form.csrf_token }}
         <div class="form-group">
             <div class="form-row">
                 <div class="col">
-                    {{ form.title.label }}
-                    {{ form.title(class = "w-100") }}
+                    {{ form.title.label(class= "form-label") }}
+                    {{ form.title(class = "w-100 form-input") }}
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
-                    {{ form.description.label }}
-                    {{ form.description(class = "w-100") }}
+                    {{ form.description.label(class= "form-label") }}
+                    {{ form.description(class = "w-100 form-input") }}
                 </div>
             </div>
             <div class="form-row">
                 <div class="col ">
-                    {{ form.rooms.label }}
-                    {{ form.rooms }}
+                    {{ form.rooms.label(class= "form-label") }}
+                    {{ form.rooms(class = "form-input") }}
                 </div>
                 <div class="col">
-                    {{ form.bathrooms.label }}
-                    {{ form.bathrooms }}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    {{ form.price.label }}
-                    {{ form.price }}
-                </div>
-                <div class="col">
-                    {{ form.ptype.label }}
-                    {{ form.ptype }}
+                    {{ form.bathrooms.label(class= "form-label") }}
+                    {{ form.bathrooms(class = "form-input") }}
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
-                    {{ form.location.label }}
-                    {{ form.location }}
+                    {{ form.price.label(class= "form-label") }}
+                    {{ form.price(class = "form-input") }}
+                </div>
+                <div class="col">
+                    {{ form.ptype.label(class= "form-label") }}
+                    {{ form.ptype(class = "form-input") }}
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
-                    {{ form.photo.label }}
-                    {{ form.photo }}
+                    {{ form.location.label(class= "form-label") }}
+                    {{ form.location(class = "form-input") }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    {{ form.photo.label(class= "form-label") }}
+                    <div id="file-wrapper">
+                        <p>Browse</p>
+                        {{ form.photo(class = "form-file") }}</div>
                 </div>
             </div>
         </div>
