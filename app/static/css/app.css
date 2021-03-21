@@ -3,7 +3,7 @@ body {
     background-color: rgb(231, 231, 231);
 }
 
-main div{
+main > div{
     margin-top: 3%;
     margin-bottom: 5%;
 }
@@ -155,7 +155,7 @@ h1{
 .property div img{
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    height: 25em;
+    max-height: min-content;
     width: 100%;
     object-fit: cover;
     overflow: hidden;
